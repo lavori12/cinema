@@ -1,0 +1,34 @@
+.hallScheme {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 50px;
+}
+
+.hall {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 10px;
+}
+
+.screen {
+    font-size: large;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+button {
+    margin-right: 10px;
+}
+
+span {
+    margin-right: 50px;
+}
+
