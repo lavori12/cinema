@@ -17,7 +17,7 @@ const SessionGallery = () => {
     const [selectedMovie, setSelectedMovie] = useState([]);
 
     useEffect(() => {
-        sessionsDB.orderByChild("filmId").equalTo(currentMovieId).on('value', (snapshot) => {
+        sessionsDB.orderByChild('filmId').equalTo(currentMovieId).on('value', (snapshot) => {
             let filteredSessions = [];
             snapshot.forEach((childSnapshot) => {
                 filteredSessions.push(childSnapshot.val());
@@ -25,7 +25,7 @@ const SessionGallery = () => {
             setSessions(filteredSessions);
         });
 
-        moviesDB.orderByChild("id").equalTo(currentMovieId).on('value', (snapshot) => {
+        moviesDB.orderByChild('id').equalTo(currentMovieId).on('value', (snapshot) => {
             snapshot.forEach((childSnapshot) => {
                 setSelectedMovie(childSnapshot.val());
             });
@@ -46,11 +46,11 @@ const SessionGallery = () => {
                         <td>Время</td>
                     </tr>
                     {sessions.map(session => <Session key={session.id} date={session.date}
-                                                                  time={session.time}
-                                                                  id={session.id} />)}
+                                                      time={session.time}
+                                                      id={session.id} />)}
                 </table>
             </div>
-            <button onClick={() => dispatch(setMovie(0))}>Назад к выбору фильма</button>
+            <button style={{marginBottom: '15px'}} onClick={() => dispatch(setMovie(0))}>Назад к выбору фильма</button>
         </div>
     )
 };

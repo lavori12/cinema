@@ -103,8 +103,10 @@ const Hall = () => {
             <div className={styles.hallScheme}>{rows}</div>
             <div className={styles.screen}>ЭКРАН</div>
             <div className={styles.buttons}>
-                <button onClick={() => dispatch(setSession(0))}> Назад к выбору сеанса</button>
+                <button style={{marginBottom: '15px'}} onClick={() => dispatch(setSession(0))}> Назад к выбору сеанса
+                </button>
                 <button
+                    style={{marginBottom: '15px'}}
                     onClick={() => reserveSelectedSeats()}> Забронировать {selectedSeats?.length} {checkWord()}</button>
             </div>
         </div>
