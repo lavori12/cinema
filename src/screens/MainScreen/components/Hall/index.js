@@ -1,9 +1,10 @@
 import styles from './Hall.module.css'
 import {useDispatch, useSelector} from 'react-redux';
-import {reserveSeat, setSession} from '../../../../store/actions';
+import {setSession} from '../../../../store/actions';
 import {ROW_NUMBER} from '../../../../store/constants';
 import Row from './Row';
 import {useState} from 'react';
+import {reservedSeatsDB} from '../../../../services/firebase';
 
 const Hall = () => {
         const dispatch = useDispatch();
@@ -20,7 +21,13 @@ const Hall = () => {
         };
 
         const reserveSelectedSeats = () => {
-            dispatch(reserveSeat(currentSessionId, selectedSeats));
+            selectedSeats.forEach(seat => {
+                reservedSeatsDB.push({
+                    row: seat.row,
+                    column: seat.column,
+                    sessionId: currentSessionId
+                })
+            });
             setSelectedSeats([]);
         };
 

@@ -1,16 +1,27 @@
 import styles from './Seat.module.css'
 import EventSeatRoundedIcon from '@material-ui/icons/EventSeatRounded';
 import {useSelector} from 'react-redux';
+import {useEffect, useState} from 'react';
+import {reservedSeatsDB} from '../../../../../../services/firebase';
 
 const Seat = (props) => {
 
-    const {currentReservedSeats} = useSelector((state) => ({
-        currentSessionId: state.currentSessionId,
-        currentReservedSeats: state.reservedSeats.filter(seat => seat.sessionId === state.currentSessionId)
-    }));
+    const currentSessionId = useSelector(state => state.currentSessionId);
+
+    const [currentReservedSeats, setCurrentReservedSeats] = useState([]);
+
+    useEffect(() => {
+        reservedSeatsDB.orderByChild("sessionId").equalTo(currentSessionId).on('value', (snapshot) => {
+            let sessionsSeats = [];
+            snapshot.forEach((childSnapshot) => {
+                sessionsSeats.push(childSnapshot.val());
+            });
+            setCurrentReservedSeats(sessionsSeats);
+        });
+    }, [currentSessionId]);
 
     const isReserved = (rowNumber, columnNumber) => {
-        return currentReservedSeats.filter(seat => seat.row === rowNumber && seat.column === columnNumber).length > 0
+        return currentReservedSeats?.filter(seat => seat.row === rowNumber && seat.column === columnNumber).length > 0
     };
 
     const checkColor = (rowNumber, columnNumber) => {

@@ -1,9 +1,23 @@
-import {useSelector} from 'react-redux';
+//import {useSelector} from 'react-redux';
 import Movie from './Movie';
 import styles from './MovieGallery.module.css'
+import {useEffect, useState} from 'react';
+import {moviesDB} from '../../../../services/firebase';
+
 
 const MovieGallery = () => {
-    const movies = useSelector(state => state.movies);
+
+    const [movies, setMovies] = useState([]);
+
+    useEffect(() => {
+        moviesDB.on('value', (snapshot) => {
+            let allMovies = [];
+            snapshot.forEach((childSnapshot) => {
+                allMovies.push(childSnapshot.val());
+            });
+            setMovies(allMovies);
+        });
+    }, []);
 
     return (
         <div className={styles.movieGallery}>
