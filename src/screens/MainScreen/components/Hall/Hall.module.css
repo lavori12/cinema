@@ -32,3 +32,33 @@ span {
     margin-right: 50px;
 }
 
+.legend {
+    display: flex;
+    flex-direction: row;
+    margin: 20px 0;
+}
+
+.legendItem {
+    display: flex;
+    flex-direction: row;
+    margin-right: 10px;
+}
+
+.legendItemReserved {
+    width: 20px;
+    height: 20px;
+    background-color: #f50057;
+    margin-right: 10px;
+}
+.legendItemFree {
+    width: 20px;
+    height: 20px;
+    background-color: #000000;
+    margin-right: 10px;
+}
+.legendItemSelected {
+    width: 20px;
+    height: 20px;
+    background-color: #3f51b5;
+    margin-right: 10px;
+}

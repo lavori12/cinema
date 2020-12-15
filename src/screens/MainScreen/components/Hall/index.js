@@ -20,15 +20,32 @@ const Hall = () => {
             return false;
         };
 
+        const makeId = () => {
+            let text = '';
+            const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+            for (let i = 0; i < 5; i++)
+                text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+            return text;
+        };
+
         const reserveSelectedSeats = () => {
-            selectedSeats.forEach(seat => {
-                reservedSeatsDB.push({
-                    row: seat.row,
-                    column: seat.column,
-                    sessionId: currentSessionId
-                })
-            });
-            setSelectedSeats([]);
+            if (selectedSeats.length > 0) {
+                selectedSeats.forEach(seat => {
+                    reservedSeatsDB.push({
+                        row: seat.row,
+                        column: seat.column,
+                        sessionId: currentSessionId
+                    })
+                });
+                alert(`Вы успешно забронировали ${selectedSeats.length} ${checkWord()}! 
+                Для выкупа билетов назовите на кассе код ${makeId()}`);
+                setSelectedSeats([]);
+            } else {
+                alert('Для бронирования выберите места')
+            }
+
         };
 
         const toggleSeatSelection = (row, column) => {
@@ -64,13 +81,32 @@ const Hall = () => {
         };
 
         return <div className={styles.hall}>
+            <div className={styles.legend}>
+                <div className={styles.legendItem}>
+                    <div className={styles.legendItemReserved} />
+                    <span>
+                    - Занято
+                </span>
+                </div>
+                <div className={styles.legendItem}>
+                    <div className={styles.legendItemFree} />
+                    <span>
+                    - Свободно
+                </span></div>
+                <div className={styles.legendItem}>
+                    <div className={styles.legendItemSelected} />
+                    <span>
+                    - Выбрано
+                </span>
+                </div>
+            </div>
             <div className={styles.hallScheme}>{rows}</div>
             <div className={styles.screen}>ЭКРАН</div>
             <div className={styles.buttons}>
                 <button onClick={() => dispatch(setSession(0))}> Назад к выбору сеанса</button>
-                <button onClick={() => reserveSelectedSeats()}> Забронировать {selectedSeats?.length} {checkWord()}</button>
+                <button
+                    onClick={() => reserveSelectedSeats()}> Забронировать {selectedSeats?.length} {checkWord()}</button>
             </div>
-
         </div>
     }
 ;
