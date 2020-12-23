@@ -6,10 +6,10 @@ const Movie = (props) => {
     const dispatch = useDispatch();
 
     return (
-        <div className={styles.movie}>
+        <div className={styles.movie} data-testid="movie">
             <img alt="" src={props.poster} />
             {props.title}
-            <button onClick={() => dispatch(setMovie(props.id))}> Выбрать</button>
+            <button data-testid="movie-button" onClick={() => dispatch(setMovie(props.id))}> Выбрать</button>
         </div>
     )
 

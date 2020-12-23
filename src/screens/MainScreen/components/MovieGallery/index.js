@@ -20,7 +20,7 @@ const MovieGallery = () => {
     }, []);
 
     return (
-        <div className={styles.movieGallery}>
+        <div className={styles.movieGallery} data-testid="gallery">
             {movies?.map(movie => <Movie key={movie.id} poster={movie.poster} title={movie.title} id={movie.id} />)}
         </div>
     )

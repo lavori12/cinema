@@ -9,7 +9,7 @@ const Session = (props) => {
         <td> {props.date} </td>
         <td> {props.time} </td>
         <td>
-            <button onClick={() => dispatch(setSession(props.id))}> Выбрать</button>
+            <button  data-testid="session-button" onClick={() => dispatch(setSession(props.id))}> Выбрать</button>
         </td>
     </tr>
 };

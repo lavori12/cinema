@@ -7,7 +7,7 @@ const initialState = {
     currentSessionId: 0
 };
 
-const reducer = (state = initialState, action) => {
+export const reducer = (state = initialState, action) => {
 
     switch (action.type) {
 
